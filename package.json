@@ -1,0 +1,100 @@
+{
+  "name": "privatewizard",
+  "displayName": "PrivateWizard — AI Agents Dashboard",
+  "description": "Dashboard para orquestrar e monitorar agents de IA dentro do seu projeto",
+  "version": "0.1.0",
+  "publisher": "WIZARD",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "activationEvents": [
+    "workspaceContains:.privatewizard/agents.json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "privateWizard",
+          "title": "PrivateWizard",
+          "icon": "media/privateWizard.svg"
+        }
+      ]
+    },
+    "views": {
+      "privateWizard": [
+        {
+          "type": "webview",
+          "id": "privateWizard.dashboard",
+          "name": "AI Agents",
+          "icon": "media/privateWizard.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "privateWizard.openDashboard",
+        "title": "PrivateWizard: Abrir Dashboard"
+      },
+      {
+        "command": "privateWizard.refresh",
+        "title": "PrivateWizard: Recarregar Agents",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "privateWizard.init",
+        "title": "PrivateWizard: Inicializar no Projeto (.privatewizard/agents.json)"
+      },
+      {
+        "command": "privateWizard.spike",
+        "title": "PrivateWizard: PTY Spike (Fase 0)"
+      },
+      {
+        "command": "privateWizard.canvas",
+        "title": "PrivateWizard: Abrir Canvas"
+      },
+      {
+        "command": "privateWizard.newAgent",
+        "title": "PrivateWizard: Novo Agente"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "privateWizard.refresh",
+          "when": "view == privateWizard.dashboard",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "PrivateWizard",
+      "properties": {
+        "privateWizard.configPath": {
+          "type": "string",
+          "default": ".privatewizard/agents.json",
+          "description": "Caminho (relativo à raiz do workspace) do arquivo de configuração dos agents."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@xterm/xterm": "^6.0.0",
+    "node-pty": "^1.1.0"
+  }
+}

@@ -1,0 +1,9 @@
+.vscode/**
+src/**
+orca/**
+out/**/*.map
+**/*.ts
+**/tsconfig.json
+**/*.zip
+Designer para extensão VSCode/**
+*.vsix
